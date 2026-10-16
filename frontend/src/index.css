@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { min-height: 100%; }
+body {
+  @apply bg-ink text-parchment font-mono text-[14px] leading-relaxed antialiased;
+  background-image: radial-gradient(60rem 30rem at 85% -10%, rgba(139,124,255,.14), transparent 60%);
+  background-attachment: fixed;
+}
+::selection { background: #FFB347; color: #0F0B1F; }
+:focus-visible { outline: 2px solid #FFB347; outline-offset: 2px; }
+
+.btn { @apply inline-flex items-center justify-center gap-2 px-4 py-2 border border-rune bg-vault text-parchment hover:border-amber hover:text-amber transition-colors disabled:opacity-50 disabled:cursor-not-allowed; }
+.btn-primary { @apply border-amber bg-amber text-ink font-bold hover:bg-parchment hover:border-parchment hover:text-ink; }
+.field { @apply w-full bg-ink border border-rune px-3 py-2 text-parchment placeholder:text-dust focus:border-amber outline-none; }
+.prose-notes p { @apply mb-3 max-w-[72ch]; }
+.prose-notes ul { @apply list-disc pl-5 mb-3; }
+.prose-notes strong { @apply text-amber; }
+
+.flip { perspective: 1200px; }
+.flip-inner { transition: transform .5s; transform-style: preserve-3d; }
+.flip-inner.is-flipped { transform: rotateY(180deg); }
+.flip-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flip-back { transform: rotateY(180deg); }
+
+@keyframes blink { 50% { opacity: 0; } }
+.caret::after { content: '▍'; color: #FFB347; animation: blink 1s steps(1) infinite; margin-left: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-inner { transition: none; }
+  .caret::after { animation: none; }
+}
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  .no-print { display: none !important; }
+  .print-area * { color: #000 !important; border-color: #999 !important; background: #fff !important; }
+}
